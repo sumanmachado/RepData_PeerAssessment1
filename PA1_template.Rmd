@@ -63,12 +63,14 @@ avg.interval[which.max(avg.interval[,2]),1]
 
 ## Imputing missing values
 
-The total number if missing values in the dataset are:
+The total number of missing values in the dataset are:
 
 ```{r, echo=FALSE}
 rowsNA <- activity[rowSums(is.na(activity)) > 0,]
 nrow(rowsNA)
 ```
+
+The strategy used for imputation is to fill in the missing NA values with the average steps for the given interval.
 
 ```{r, echo=FALSE}
 ## Filling in missing values in the dataset
