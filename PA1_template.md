@@ -160,6 +160,13 @@ avg.wday <-aggregate(activity$steps, by=list(activity$wend,activity$interval),FU
 
 ## panel plot containing a time series plot
 library(ggplot2, quietly=TRUE)
+```
+
+```
+## Warning: package 'ggplot2' was built under R version 3.1.3
+```
+
+```r
 ggplot(avg.wday,aes(x=Group.2,y=x,colour=Group.1,group=Group.1)) + geom_line() + facet_wrap( ~ Group.1, nrow=2) + 
   xlab("Interval") + ylab("Number of steps") + theme(legend.position = "none")
 ```
