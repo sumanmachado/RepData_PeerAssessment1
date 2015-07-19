@@ -101,7 +101,7 @@ activity$wend <- as.factor(ifelse(activity$wday %in% c("Saturday","Sunday"), "We
 avg.wday <-aggregate(activity$steps, by=list(activity$wend,activity$interval),FUN="mean", na.rm=TRUE)
 
 ## panel plot containing a time series plot
-library(ggplot2)
+library(ggplot2, quietly=TRUE)
 ggplot(avg.wday,aes(x=Group.2,y=x,colour=Group.1,group=Group.1)) + geom_line() + facet_wrap( ~ Group.1, nrow=2) + 
   xlab("Interval") + ylab("Number of steps") + theme(legend.position = "none")
 ```
