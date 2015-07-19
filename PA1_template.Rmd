@@ -19,7 +19,7 @@ interval: Identifier for the 5-minute interval in which measurement was taken
 
 The dataset is stored in a comma-separated-value (CSV) file and there are a total of 17,568 observations in this dataset.
 
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 ## Loading and preprocessing the data
 activity <- read.csv("activity.csv", header=TRUE)
 
@@ -29,7 +29,7 @@ activity$date <- as.Date(as.character(activity$date), "%Y-%m-%d")
 
 ### What is mean total number of steps taken per day?
 
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 ## count number of steps per day
 aggdata <-aggregate(activity$steps, by=list(activity$date),"sum", na.rm=TRUE)
 
@@ -46,9 +46,18 @@ abline(v = med.steps, col = "orange", lwd = 2)
 
 Note: The mean is a red line and the median is an orange line.
 
+The mean number of steps taken per day is: 
+```{r, echo=TRUE}
+mean.steps
+```
+The median number of steps taken per day is: 
+```{r, echo=TRUE}
+med.steps
+```
+
 ## What is the average daily activity pattern?
 
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 ## Calculate and plot the average steps taken per interval
 avg.interval <-aggregate(activity$steps, by=list(activity$interval),FUN="mean", na.rm=TRUE)
 plot(avg.interval$Group.1, avg.interval$x, type="l", col="red", main="Average steps taken per Time Interval", 
@@ -57,7 +66,7 @@ plot(avg.interval$Group.1, avg.interval$x, type="l", col="red", main="Average st
 
 The 5-minute interval that contains the maximum number of steps
 
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 avg.interval[which.max(avg.interval[,2]),1]
 ```
 
@@ -65,14 +74,14 @@ avg.interval[which.max(avg.interval[,2]),1]
 
 The total number of missing values in the dataset are:
 
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 rowsNA <- activity[rowSums(is.na(activity)) > 0,]
 nrow(rowsNA)
 ```
 
 The strategy used for imputation is to fill in the missing NA values with the average steps for the given interval.
 
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 ## Filling in missing values in the dataset
 activity[is.na(activity$steps),"steps"] = avg.interval[2]
 
@@ -90,11 +99,20 @@ abline(v = med.steps, col = "orange", lwd = 2)
 
 Note: The mean is a red line and the median is an orange line.
 
+The mean number of steps taken per day is: 
+```{r, echo=TRUE}
+mean.steps
+```
+The median number of steps taken per day is: 
+```{r, echo=TRUE}
+med.steps
+```
+
 The impact of imputing missing data on the estimates of the total daily number of steps is that the data has a wider distribution and the mean and median are the same.
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 ##Adding a factor for weekday or weekend
 activity$wday <- weekdays(activity$date)
 activity$wend <- as.factor(ifelse(activity$wday %in% c("Saturday","Sunday"), "Weekend", "Weekday"))
